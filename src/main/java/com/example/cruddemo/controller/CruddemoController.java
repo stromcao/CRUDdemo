@@ -13,20 +13,18 @@ public class CruddemoController {
     @Resource
     CrudService crudService;
 
-    @ResponseBody
     @PostMapping("/create")
-    public String create(@RequestBody Student student){
+    public String create(@ModelAttribute Student student){
         crudService.Insert(student);
         return "增加成功";
     }
-    @ResponseBody
+
     @GetMapping("/selectAll")
     public ArrayList<Student> SelectAllStudents(){
         ArrayList<Student> students = crudService.SelectAllStudents();
         return students;
     }
 
-    @ResponseBody
     @GetMapping("/selectOne")
     public Student findStuByName(@RequestParam String name){
         System.out.println("这里是控制器");
