@@ -12,16 +12,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/jwt", produces = {"application/json; charset=UTF-8"})
+@RequestMapping(value = "/user", produces = {"application/json; charset=UTF-8"})
 public class JWTController {
-    private static final String SECRET = "wangmengtest.@163.com";
+    private static final String SECRET = "ThisIsASecretKeyThatShouldBeLongEnoughForHS512";
     @RequestMapping("/login/{username}/{password}")
     public Map login(@PathVariable String username, @PathVariable String password) {
         Map result = new HashMap();
         if (username.equals("admin") && password.equals("123456")) {
             String jwt = Jwts.builder().
                     setSubject(username).
-                    signWith(SignatureAlgorithm.HS512, SECRET).
+                    signWith(SignatureAlgorithm.HS256, SECRET).
                     compact();
             result.put("token", jwt);
         } else {
